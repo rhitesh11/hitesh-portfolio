@@ -18,16 +18,16 @@ export default function Modal({ isOpen, section, onClose }: ModalProps) {
       case "about":
         return (
           <div className="space-y-6">
-            <h2 className="text-3xl font-bold text-indigo-600 border-b pb-2">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-indigo-800 border-b border-indigo-200 pb-2">
               About Me
             </h2>
 
-            <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+            <div className="bg-white p-4 md:p-6 rounded-xl border border-gray-200 shadow-sm">
               <h3 className="text-2xl font-semibold text-gray-900">
                 {portfolioData.basics.name}
               </h3>
 
-              <p className="text-indigo-600 font-medium mb-4">
+              <p className="text-indigo-800 font-medium mb-4">
                 {portfolioData.basics.title}
               </p>
 
@@ -46,7 +46,7 @@ export default function Modal({ isOpen, section, onClose }: ModalProps) {
                 <p className="text-sm text-gray-500">Email</p>
                 <a
                   href={`mailto:${portfolioData.basics.email}`}
-                  className="text-indigo-600 hover:underline"
+                  className="text-indigo-800 hover:underline"
                 >
                   {portfolioData.basics.email}
                 </a>
@@ -61,20 +61,20 @@ export default function Modal({ isOpen, section, onClose }: ModalProps) {
         return (
           <div className="space-y-6">
 
-            <h2 className="text-3xl font-bold text-indigo-600 border-b pb-2">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-indigo-800 border-b border-indigo-200 pb-2">
               Education
             </h2>
 
             {portfolioData.education.map((edu, idx) => (
               <div
                 key={idx}
-                className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm"
+                className="bg-white p-4 md:p-6 rounded-xl border border-gray-200 shadow-sm"
               >
                 <h3 className="text-xl font-semibold text-gray-900">
                   {edu.degree}
                 </h3>
 
-                <p className="text-indigo-600">{edu.institution}</p>
+                <p className="text-indigo-800">{edu.institution}</p>
 
                 <div className="flex justify-between mt-3 text-sm">
                   <span className="text-gray-500">{edu.dates}</span>
@@ -92,21 +92,21 @@ export default function Modal({ isOpen, section, onClose }: ModalProps) {
         return (
           <div className="space-y-6">
 
-            <h2 className="text-3xl font-bold text-indigo-600 border-b pb-2">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-indigo-800 border-b border-indigo-200 pb-2">
               Projects
             </h2>
 
-            <div className="grid gap-6 max-h-[60vh] overflow-y-auto">
+            <div className="grid gap-4 md:gap-6 max-h-[60vh] overflow-y-auto custom-scrollbar">
 
               {portfolioData.projects.map((proj, idx) => (
 
                 <motion.div
                   key={idx}
                   whileHover={{ scale: 1.02 }}
-                  className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm"
+                  className="bg-white p-4 md:p-6 rounded-xl border border-gray-200 shadow-sm"
                 >
 
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">
+                  <h3 className="text-xl font-extrabold text-gray-900 mb-2">
                     {proj.title}
                   </h3>
 
@@ -144,11 +144,11 @@ export default function Modal({ isOpen, section, onClose }: ModalProps) {
         return (
           <div className="space-y-6">
 
-            <h2 className="text-3xl font-bold text-indigo-600 border-b pb-2">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-indigo-800 border-b border-indigo-200 pb-2">
               Skills
             </h2>
 
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
 
               {Object.entries(portfolioData.skills).map(([category, skills]) => (
 
@@ -157,7 +157,7 @@ export default function Modal({ isOpen, section, onClose }: ModalProps) {
                   className="bg-white p-5 border border-gray-200 rounded-xl shadow-sm"
                 >
 
-                  <h3 className="text-lg font-semibold text-indigo-600 mb-3 capitalize">
+                  <h3 className="text-lg font-semibold text-indigo-800 mb-3 capitalize">
                     {category.replace("_", " ")}
                   </h3>
 
@@ -189,7 +189,7 @@ export default function Modal({ isOpen, section, onClose }: ModalProps) {
         return (
           <div className="space-y-6">
 
-            <h2 className="text-3xl font-bold text-indigo-600 border-b pb-2">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-indigo-800 border-b border-indigo-200 pb-2">
               Experience
             </h2>
 
@@ -197,16 +197,16 @@ export default function Modal({ isOpen, section, onClose }: ModalProps) {
 
               <div
                 key={idx}
-                className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm"
+                className="bg-white p-4 md:p-6 rounded-xl border border-gray-200 shadow-sm"
               >
 
                 <div className="flex justify-between mb-2">
 
-                  <h3 className="text-xl font-bold text-gray-900">
+                  <h3 className="text-xl font-extrabold text-gray-900">
                     {exp.role}
                   </h3>
 
-                  <span className="text-sm text-indigo-600">
+                  <span className="text-sm text-indigo-800">
                     {exp.dates}
                   </span>
 
@@ -237,7 +237,7 @@ export default function Modal({ isOpen, section, onClose }: ModalProps) {
         return (
           <div className="text-center space-y-6">
 
-            <h2 className="text-3xl font-bold text-indigo-600 border-b pb-2">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-indigo-800 border-b border-indigo-200 pb-2">
               Download Resume
             </h2>
 
@@ -258,11 +258,11 @@ export default function Modal({ isOpen, section, onClose }: ModalProps) {
         return (
           <div className="space-y-6">
 
-            <h2 className="text-3xl font-bold text-indigo-600 border-b pb-2">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-indigo-800 border-b border-indigo-200 pb-2">
               Contact
             </h2>
 
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
               <a
                 href={`mailto:${portfolioData.basics.email}`}
@@ -313,7 +313,7 @@ export default function Modal({ isOpen, section, onClose }: ModalProps) {
       >
 
         <motion.div
-          className="relative w-full max-w-4xl bg-white rounded-2xl shadow-xl border border-gray-200 p-8"
+          className="relative w-[95%] md:w-full max-w-4xl bg-white rounded-2xl shadow-xl border border-gray-200 p-4 md:p-8 max-h-[90vh] overflow-y-auto"
           initial={{ scale: 0.9 }}
           animate={{ scale: 1 }}
           exit={{ scale: 0.9 }}
@@ -322,7 +322,7 @@ export default function Modal({ isOpen, section, onClose }: ModalProps) {
 
           <button
             onClick={onClose}
-            className="absolute top-4 right-4"
+            className="absolute top-2 right-2 md:top-4 md:right-4"
           >
             <X />
           </button>

@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import VirtualJoystick from "phaser3-rex-plugins/plugins/virtualjoystick.js";
 
 export default class GameScene extends Phaser.Scene {
 
@@ -26,6 +27,9 @@ private trafficTurn:"horizontal"|"vertical"="horizontal";
 
 private pedestrians: Phaser.Physics.Arcade.Sprite[] = [];
 private npcMovementStarted = false;
+private joystick!: any;
+private interactButton!: Phaser.GameObjects.Text;
+// private targetPoint: {x:number,y:number} | null = null;
 // private npcMovementStarted = false;
 
   constructor(){
@@ -43,6 +47,7 @@ private npcMovementStarted = false;
 
     // CAR SPRITE
     this.load.image("car","/assets/car.png");
+    this.load.audio("bgMusic", "/assets/music.mp3");
 
     const g=this.add.graphics();
 
@@ -162,7 +167,7 @@ b.setDepth(10);
     // PLAYER
     const texture=this.characterType==="male"?"player-male":"player-female";
 
-    this.player=this.physics.add.sprite(1000,1000,texture);
+    this.player=this.physics.add.sprite(900,900,texture);
     this.player.setCollideWorldBounds(true);
     this.player.setDepth(30);
 
@@ -177,7 +182,16 @@ b.setDepth(10);
 
     // CAMERA
     this.cameras.main.startFollow(this.player,true,0.1,0.1);
-    this.cameras.main.setZoom(1.3);
+    this.cameras.main.setBounds(0,0,2000,2000);
+  const screenWidth = this.scale.width;
+
+if(screenWidth < 500){
+  this.cameras.main.setZoom(0.7);
+}else if(screenWidth < 900){
+  this.cameras.main.setZoom(1);
+}else{
+  this.cameras.main.setZoom(1.3);
+}
 
     // INTERACTION TEXT
     this.interactionText=this.add.text(0,0,"Press E to Enter",{
@@ -335,15 +349,87 @@ for(let i=0;i<25;i++){
 }
     // MINIMAP
 
-    this.miniMap=this.cameras.add(window.innerWidth-220,20,200,200);
-    this.miniMap.setZoom(0.1);
-    this.miniMap.startFollow(this.player);
-    this.miniMap.setBackgroundColor(0x000000);
+const miniSize = window.innerWidth < 768 ? 120 : 200;
+
+this.miniMap = this.cameras.add(
+  this.scale.width - miniSize - 20,
+  20,
+  miniSize,
+  miniSize
+);
+
+this.miniMap.setZoom(0.1);
+this.miniMap.startFollow(this.player);
+this.miniMap.setBackgroundColor(0x000000);
+this.miniMap.setScroll(0,0);
 
 
 this.time.delayedCall(100, () => {
   this.npcMovementStarted = true;
 });
+
+// MOBILE JOYSTICK
+if (this.sys.game.device.os.android || this.sys.game.device.os.iOS) {
+
+  this.joystick = new VirtualJoystick(this, {
+    x: 120,
+    y: this.scale.height - 120,
+    radius: 60,
+    base: this.add.circle(0, 0, 60, 0x000000, 0.3),
+    thumb: this.add.circle(0, 0, 30, 0xffffff, 0.8),
+    dir: "8dir",
+    forceMin: 16
+  });
+
+}
+
+// MOBILE INTERACT BUTTON
+if (this.sys.game.device.os.android || this.sys.game.device.os.iOS) {
+
+  this.interactButton = this.add.text(
+    this.scale.width - 80,
+    this.scale.height - 80,
+    "E",
+    {
+      fontSize: "28px",
+      backgroundColor: "#2563eb",
+      color: "#ffffff",
+      padding: {x:15,y:10}
+    }
+  )
+  .setOrigin(0.5)
+  .setScrollFactor(0)
+  .setDepth(100)
+  .setInteractive();
+
+  this.interactButton.on("pointerdown", () => {
+
+    if(this.currentBuilding){
+      this.onEnterBuilding(this.currentBuilding);
+    }
+
+  });
+
+}
+
+const music = this.sound.add("bgMusic", {
+  loop: true,
+  volume: 0.2
+});
+
+music.play();
+
+// // TAP TO MOVE
+// this.input.on("pointerdown", (pointer:Phaser.Input.Pointer)=>{
+
+//   const worldPoint = pointer.positionToCamera(this.cameras.main) as Phaser.Math.Vector2;
+
+//   this.targetPoint = {
+//     x: worldPoint.x,
+//     y: worldPoint.y
+//   };
+
+// });
 
   }
 
@@ -492,6 +578,55 @@ else{
     }
 
   });
+
+  // JOYSTICK MOVEMENT
+if (this.joystick) {
+
+  const cursorKeys = this.joystick.createCursorKeys();
+
+  if (cursorKeys.left.isDown) {
+    this.player.setVelocityX(-speed);
+  }
+  else if (cursorKeys.right.isDown) {
+    this.player.setVelocityX(speed);
+  }
+
+  if (cursorKeys.up.isDown) {
+    this.player.setVelocityY(-speed);
+  }
+  else if (cursorKeys.down.isDown) {
+    this.player.setVelocityY(speed);
+  }
+
+}
+
+// TAP MOVEMENT
+// if(this.targetPoint){
+
+//   const dist = Phaser.Math.Distance.Between(
+//     this.player.x,
+//     this.player.y,
+//     this.targetPoint.x,
+//     this.targetPoint.y
+//   );
+
+//   if(dist > 10){
+
+//     this.physics.moveTo(
+//       this.player,
+//       this.targetPoint.x,
+//       this.targetPoint.y,
+//       speed
+//     );
+
+//   }else{
+
+//     this.player.setVelocity(0);
+//     this.targetPoint = null;
+
+//   }
+
+// }
 
 }
 

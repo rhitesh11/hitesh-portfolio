@@ -29,7 +29,7 @@ export default function App() {
   };
 
   return (
-    <div className="w-screen h-screen overflow-hidden bg-slate-950 font-sans">
+    <div className="w-screen h-screen overflow-hidden bg-slate-950 font-sans touch-none">
       {gameState === 'intro' && <IntroScreen onStart={handleStart} />}
       
       {gameState === 'character' && (
@@ -42,7 +42,7 @@ export default function App() {
           
           <button 
             onClick={handleChangeCharacter}
-            className="fixed top-4 left-4 z-10 px-4 py-2 bg-slate-800/80 hover:bg-slate-700 text-white rounded-lg border border-slate-600 backdrop-blur-sm transition-colors text-sm font-medium shadow-lg"
+            className="fixed top-2 left-2 z-10 px-3 py-2 text-xs bg-slate-800/80 hover:bg-slate-700 text-white rounded-lg border border-slate-600 backdrop-blur-sm transition-colors text-sm font-medium shadow-lg"
           >
             Change Character
           </button>

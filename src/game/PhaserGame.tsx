@@ -19,25 +19,29 @@ export default function PhaserGame({ character, onEnterBuilding }: PhaserGamePro
   useEffect(() => {
     if (!containerRef.current) return;
 
-    const config: Phaser.Types.Core.GameConfig = {
-      type: Phaser.AUTO,
-      width: window.innerWidth,
-      height: window.innerHeight,
-      parent: containerRef.current,
-      physics: {
-        default: 'arcade',
-        arcade: {
-          gravity: { x: 0, y: 0 },
-          debug: false,
-        },
-      },
-      scene: [GameScene],
-      backgroundColor: '#f4f7fb',
-      scale: {
-        mode: Phaser.Scale.RESIZE,
-        autoCenter: Phaser.Scale.CENTER_BOTH,
-      },
-    };
+  const config: Phaser.Types.Core.GameConfig = {
+  type: Phaser.AUTO,
+  width: window.innerWidth,
+  height: window.innerHeight,
+  parent: containerRef.current,
+
+  physics: {
+    default: 'arcade',
+    arcade: {
+      gravity: { x: 0, y: 0 },
+      debug: false
+    }
+  },
+
+  scene: [GameScene],
+
+  scale: {
+    mode: Phaser.Scale.RESIZE,
+    autoCenter: Phaser.Scale.CENTER_BOTH
+  },
+
+  backgroundColor: '#f4f7fb'
+};
 
     const game = new Phaser.Game(config);
 
@@ -48,14 +52,10 @@ export default function PhaserGame({ character, onEnterBuilding }: PhaserGamePro
 
     gameInstance.current = game;
 
-    const handleResize = () => {
-      game.scale.resize(window.innerWidth, window.innerHeight);
-    };
-
-    window.addEventListener('resize', handleResize);
+ 
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      
       game.destroy(true);
     };
   }, [character]);
