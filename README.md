@@ -1,20 +1,33 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Hitesh Rochlani - Gamified Developer Portfolio
 
-# Run and deploy your AI Studio app
+A gamified portfolio website built with **React, Phaser.js, TypeScript and TailwindCSS**.
 
-This contains everything you need to run your app locally.
+The portfolio is designed like a small 2D game where visitors can explore different sections such as:
 
-View your app in AI Studio: https://ai.studio/apps/df18052b-46d4-4457-9b07-6d3b07586faf
+* About
+* Projects
+* Skills
+* Experience
+* Contact
 
-## Run Locally
+### Tech Stack
 
-**Prerequisites:**  Node.js
+* React
+* Phaser.js
+* TypeScript
+* TailwindCSS
+* Vite
 
+### Live Website
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+https://rhitesh11.github.io/hitesh-portfolio/
+
+### Run Locally
+
+Install dependencies
+
+npm install
+
+Run the project
+
+npm run dev
