@@ -195,11 +195,14 @@ if(screenWidth < 500){
 
     // INTERACTION TEXT
     this.interactionText=this.add.text(0,0,"Press E to Enter",{
-      fontSize:"14px",
-      backgroundColor:"#2563eb",
-      color:"#ffffff",
-      padding:{x:8,y:4}
-    }).setOrigin(0.5).setVisible(false);
+  fontSize:"14px",
+  backgroundColor:"#2563eb",
+  color:"#ffffff",
+  padding:{x:8,y:4}
+})
+.setOrigin(0.5)
+.setVisible(false)
+.setDepth(1000);
 
     // NPCs
     const npcMessages=[
@@ -414,7 +417,7 @@ if (this.sys.game.device.os.android || this.sys.game.device.os.iOS) {
 
 const music = this.sound.add("bgMusic", {
   loop: true,
-  volume: 0.2
+  volume: 0.3
 });
 
 music.play();

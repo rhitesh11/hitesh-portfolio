@@ -242,7 +242,7 @@ export default function Modal({ isOpen, section, onClose }: ModalProps) {
             </h2>
 
             <a
-              href="/resume.pdf"
+              href="/Hitesh_Rochlani_Resume.pdf.pdf"
               download
               className="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-500"
             >
