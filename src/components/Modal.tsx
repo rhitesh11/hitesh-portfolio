@@ -141,48 +141,123 @@ export default function Modal({ isOpen, section, onClose }: ModalProps) {
 
       // SKILLS
       case "skills":
-        return (
-          <div className="space-y-6">
+  return (
 
-            <h2 className="text-2xl md:text-3xl font-extrabold text-indigo-800 border-b border-indigo-200 pb-2">
-              Skills
-            </h2>
+<div className="space-y-8">
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+<h2 className="text-3xl font-bold text-indigo-700 border-b pb-2">
+💻 Tech Stack & Skills
+</h2>
 
-              {Object.entries(portfolioData.skills).map(([category, skills]) => (
+<div className="grid md:grid-cols-2 gap-6">
 
-                <div
-                  key={category}
-                  className="bg-white p-5 border border-gray-200 rounded-xl shadow-sm"
-                >
+{/* FRONTEND */}
+<div className="bg-white p-6 rounded-xl border shadow-sm">
 
-                  <h3 className="text-lg font-semibold text-indigo-800 mb-3 capitalize">
-                    {category.replace("_", " ")}
-                  </h3>
+<h3 className="text-xl font-semibold text-indigo-600 mb-4">
+🎨 Frontend
+</h3>
 
-                  <div className="flex flex-wrap gap-2">
+<div className="flex flex-wrap gap-3">
 
-                    {skills.map((skill, i) => (
-                      <span
-                        key={i}
-                        className="text-sm bg-gray-100 text-gray-800 px-3 py-1 rounded-full"
-                      >
-                        {skill}
-                      </span>
-                    ))}
+<span className="skill-pill">⚛ React</span>
+<span className="skill-pill">🎨 Tailwind CSS</span>
+<span className="skill-pill">🧩 Material UI</span>
+<span className="skill-pill">🌐 HTML</span>
+<span className="skill-pill">🎨 CSS</span>
+<span className="skill-pill">⚡ JavaScript</span>
 
-                  </div>
+</div>
+</div>
 
-                </div>
+{/* BACKEND */}
+<div className="bg-white p-6 rounded-xl border shadow-sm">
 
-              ))}
+<h3 className="text-xl font-semibold text-indigo-600 mb-4">
+⚙ Backend
+</h3>
 
-            </div>
+<div className="flex flex-wrap gap-3">
 
-          </div>
-        );
+<span className="skill-pill">🟢 Node.js</span>
+<span className="skill-pill">🚂 Express.js</span>
+<span className="skill-pill">🐘 PHP</span>
+<span className="skill-pill">🐍 Python</span>
+<span className="skill-pill">☕ Java</span>
+<span className="skill-pill">💻 C++</span>
 
+</div>
+</div>
+
+{/* DATABASE */}
+<div className="bg-white p-6 rounded-xl border shadow-sm">
+
+<h3 className="text-xl font-semibold text-indigo-600 mb-4">
+🗄 Databases
+</h3>
+
+<div className="flex flex-wrap gap-3">
+
+<span className="skill-pill">🐬 MySQL</span>
+<span className="skill-pill">🐘 PostgreSQL</span>
+<span className="skill-pill">⚡ Redis</span>
+
+</div>
+</div>
+
+{/* DEVOPS */}
+<div className="bg-white p-6 rounded-xl border shadow-sm">
+
+<h3 className="text-xl font-semibold text-indigo-600 mb-4">
+🚀 DevOps
+</h3>
+
+<div className="flex flex-wrap gap-3">
+
+<span className="skill-pill">🐳 Docker</span>
+<span className="skill-pill">⚙ Jenkins</span>
+<span className="skill-pill">🔄 CI/CD</span>
+<span className="skill-pill">📡 Kafka</span>
+
+</div>
+</div>
+
+{/* TESTING */}
+<div className="bg-white p-6 rounded-xl border shadow-sm">
+
+<h3 className="text-xl font-semibold text-indigo-600 mb-4">
+🧪 Testing
+</h3>
+
+<div className="flex flex-wrap gap-3">
+
+<span className="skill-pill">🧪 Cypress</span>
+<span className="skill-pill">📱 Appium</span>
+<span className="skill-pill">📮 Postman</span>
+
+</div>
+</div>
+
+{/* TOOLS */}
+<div className="bg-white p-6 rounded-xl border shadow-sm">
+
+<h3 className="text-xl font-semibold text-indigo-600 mb-4">
+🧰 Tools
+</h3>
+
+<div className="flex flex-wrap gap-3">
+
+<span className="skill-pill">📝 VS Code</span>
+<span className="skill-pill">🌳 Git</span>
+
+</div>
+</div>
+
+</div>
+
+</div>
+
+  );
 
       // EXPERIENCE
       case "experience":
@@ -242,7 +317,7 @@ export default function Modal({ isOpen, section, onClose }: ModalProps) {
             </h2>
 
             <a
-              href="/Hitesh_Rochlani_Resume.pdf.pdf"
+              href={`${import.meta.env.BASE_URL}Hitesh_Rochlani_Resume.pdf`}
               download
               className="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-500"
             >

@@ -117,52 +117,260 @@ private interactButton!: Phaser.GameObjects.Text;
     }
 
     // BUILDINGS
-    const buildingData=[
+    // BUILDINGS
+const buildingData=[
 
-      {id:"about",name:"🏠 About",x:600,y:600,color:0xbfdbfe},
-      {id:"education",name:"🎓 Education",x:1400,y:600,color:0xe9d5ff},
-      {id:"projects",name:"💻 Projects",x:600,y:1400,color:0xa7f3d0},
-      {id:"skills",name:"⚙️ Skills",x:1400,y:1400,color:0xfde68a},
-      {id:"experience",name:"🏢 Experience",x:400,y:1000,color:0xfecaca},
-      {id:"contact",name:"📞 Contact",x:1600,y:1000,color:0xfbcfe8},
-      {id:"resume",name:"📄 Resume",x:1000,y:1600,color:0xdbeafe}
+  {id:"about",name:"🏠 About",x:600,y:600,color:0xbfdbfe,type:"house"},
+  {id:"education",name:"🎓 Education",x:1400,y:600,color:0xe9d5ff,type:"school"},
+  {id:"projects",name:"💻 Projects",x:600,y:1400,color:0xa7f3d0,type:"lab"},
+  {id:"skills",name:"⚙️ Skills",x:1400,y:1400,color:0xfde68a,type:"factory"},
+  {id:"experience",name:"🏢 Experience",x:400,y:1000,color:0xfecaca,type:"office"},
+  {id:"contact",name:"📞 Contact",x:1600,y:1000,color:0xfbcfe8,type:"booth"},
+  {id:"resume",name:"📄 Resume",x:1000,y:1600,color:0xdbeafe,type:"library"}
 
-    ];
+];
+
+const screenScale = window.innerWidth < 768 ? 0.8 : 1;
 
 const b=this.add.graphics();
 b.setDepth(10);
 
-    buildingData.forEach(data=>{
+buildingData.forEach(data=>{
 
-      const w=160;
-      const h=120;
+  const w=160 * screenScale;
+  const h=120 * screenScale;
 
-      b.fillStyle(0x000000,0.15);
-      b.fillRect(data.x-w/2+10,data.y-h/2+10,w,h);
+  // SHADOW
+  b.fillStyle(0x000000,0.2);
+  b.fillRect(data.x-w/2+10,data.y-h/2+10,w,h);
 
-      b.fillStyle(data.color);
-      b.fillRect(data.x-w/2,data.y-h/2,w,h);
+  // BUILDING BODY
+  b.fillStyle(data.color);
+  b.fillRect(data.x-w/2,data.y-h/2,w,h);
 
-      b.fillStyle(0x374151);
-      b.fillRect(data.x-15,data.y+20,30,40);
+  // DIFFERENT BUILDING TYPES
+// ABOUT HOUSE
+if(data.type==="house"){
 
-      const rect=this.add.rectangle(data.x,data.y,w,h,0,0);
-      this.physics.add.existing(rect,true);
+  b.fillStyle(0xef4444);
 
-      rect.setDepth(20);
+  b.fillTriangle(
+    data.x-w/2-10,
+    data.y-h/2,
+    data.x+w/2+10,
+    data.y-h/2,
+    data.x,
+    data.y-h/2-70
+  );
 
-    const label=this.add.text(data.x,data.y-80,data.name,{
-  fontSize:"16px",
-  color:"#111827",
-  backgroundColor:"#ffffffcc",
-  padding:{x:8,y:4}
-})
-.setOrigin(0.5)
-.setDepth(100);
+}
 
-      this.buildings.push({sprite:rect,id:data.id});
 
-    });
+// EDUCATION SCHOOL
+if(data.type==="school"){
+
+  b.fillStyle(0x8b5cf6);
+
+  b.fillTriangle(
+    data.x-w/2,
+    data.y-h/2,
+    data.x+w/2,
+    data.y-h/2,
+    data.x,
+    data.y-h/2-50
+  );
+
+  b.fillStyle(0xffffff);
+
+  b.fillRect(data.x-10,data.y-h/2-20,20,20);
+
+}
+
+
+// PROJECT LAB
+if(data.type==="lab"){
+
+  b.fillStyle(0x22c55e);
+
+  b.fillRoundedRect(
+    data.x-w/2,
+    data.y-h/2,
+    w,
+    h,
+    20
+  );
+
+  b.fillStyle(0x166534);
+
+  b.fillCircle(data.x,data.y-30,10);
+
+}
+
+
+// SKILLS FACTORY
+if(data.type==="factory"){
+
+  b.fillStyle(0x6b7280);
+
+  b.fillRect(
+    data.x-w/2,
+    data.y-h/2,
+    w,
+    h
+  );
+
+  // chimney
+  b.fillRect(data.x+50,data.y-h/2-60,20,60);
+
+}
+
+
+// EXPERIENCE OFFICE
+if(data.type==="office"){
+
+  b.fillStyle(0x93c5fd);
+
+  b.fillRoundedRect(
+    data.x-w/2,
+    data.y-h/2,
+    w,
+    h,
+    10
+  );
+
+  b.fillStyle(0x1e40af);
+
+  for(let i=-40;i<=40;i+=40){
+
+    b.fillRect(data.x+i,data.y-30,20,20);
+
+  }
+
+}
+
+
+// CONTACT BOOTH
+if(data.type==="booth"){
+
+  b.fillStyle(0xdb2777);
+
+  b.fillRoundedRect(
+    data.x-w/2,
+    data.y-h/2,
+    w,
+    h,
+    30
+  );
+
+  b.fillStyle(0xffffff);
+
+  b.fillRect(data.x-20,data.y-20,40,40);
+
+}
+
+
+// RESUME LIBRARY
+if(data.type==="library"){
+
+  b.fillStyle(0x2563eb);
+
+  b.fillTriangle(
+    data.x-w/2,
+    data.y-h/2,
+    data.x+w/2,
+    data.y-h/2,
+    data.x,
+    data.y-h/2-60
+  );
+
+  b.fillStyle(0x1e3a8a);
+
+  b.fillRect(data.x-w/2,data.y-h/2,w,h);
+
+}
+  // if(data.type==="house"){
+
+  //   b.fillStyle(0xef4444);
+  //   b.fillTriangle(
+  //     data.x-w/2-10,
+  //     data.y-h/2,
+  //     data.x+w/2+10,
+  //     data.y-h/2,
+  //     data.x,
+  //     data.y-h/2-60
+  //   );
+
+  // }
+
+  // if(data.type==="office"){
+
+  //   b.fillStyle(0x93c5fd);
+
+  //   for(let i=-40;i<=40;i+=40){
+  //     b.fillRect(data.x+i,data.y-30,20,20);
+  //   }
+
+  // }
+
+  // if(data.type==="factory"){
+
+  //   b.fillStyle(0x6b7280);
+  //   b.fillRect(data.x+40,data.y-h/2-40,20,40);
+
+  // }
+
+  // if(data.type==="lab"){
+
+  //   b.fillStyle(0x22c55e);
+
+  //   b.fillRect(data.x-40,data.y-30,20,20);
+  //   b.fillRect(data.x,data.y-30,20,20);
+  //   b.fillRect(data.x+40,data.y-30,20,20);
+
+  // }
+
+  // if(data.type==="library"){
+
+  //   b.fillStyle(0x1e3a8a);
+  //   b.fillRect(data.x-30,data.y-30,10,40);
+
+  //   b.fillStyle(0x2563eb);
+  //   b.fillRect(data.x-10,data.y-30,10,40);
+
+  //   b.fillStyle(0x3b82f6);
+  //   b.fillRect(data.x+10,data.y-30,10,40);
+
+  // }
+
+  // if(data.type==="booth"){
+
+  //   b.fillStyle(0xdb2777);
+  //   b.fillRect(data.x-w/2,data.y-h/2,w,20);
+
+  // }
+
+  // DOOR
+  b.fillStyle(0x374151);
+  b.fillRect(data.x-15,data.y+20,30,40);
+
+  // COLLISION BOX
+  const rect=this.add.rectangle(data.x,data.y,w,h,0,0);
+  this.physics.add.existing(rect,true);
+
+  rect.setDepth(20);
+
+  const label=this.add.text(data.x,data.y-80,data.name,{
+    fontSize:"16px",
+    color:"#111827",
+    backgroundColor:"#ffffffcc",
+    padding:{x:8,y:4}
+  })
+  .setOrigin(0.5)
+  .setDepth(100);
+
+  this.buildings.push({sprite:rect,id:data.id});
+
+});
 
     // PLAYER
     const texture=this.characterType==="male"?"player-male":"player-female";

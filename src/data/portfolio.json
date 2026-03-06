@@ -1,7 +1,7 @@
 {
   "basics": {
     "name": "Hitesh Hareshlal Rochlani",
-    "title": "Software Engineer Intern | Backend, DevOps & Automation",
+    "title": "Software Engineer | Backend Developer | DevOps & Automation Testing",
     "summary": "I’m a Software Engineer Intern with hands-on experience in backend development, DevOps, and automation testing. I’ve worked at OneStopEngineering as a Software Engineering Intern and DevOps Intern, where I contributed to backend development, database integration, CI/CD pipelines, and Docker-based deployments. I’ve worked with Java, PHP (Laravel), JavaScript, React, Node.js, Docker, Jenkins, Cypress, and Apache Kafka, and I enjoy building real-world, scalable systems. I’m currently open to Software Engineer Intern, Backend, DevOps, or QA Automation opportunities.",
     "location": "Mumbai, India",
     "email": "hiteshrochlani2004@gmail.com",
@@ -52,15 +52,6 @@
       ]
     },
     {
-      "title": "Expense Tracker API",
-      "tech_stack": ["Node.js", "Express", "MongoDB", "JSON"],
-      "description": [
-        "Built a backend for user authentication and managing daily expenses with CRUD and summary endpoint.",
-        "Implemented JWT-based authentication, filtering, search, and aggregation.",
-        "Tested all APIs using Postman, ready for frontend integration."
-      ]
-    },
-    {
       "title": "Real-Time Messaging Server",
       "tech_stack": ["Java Sockets", "Multithreading"],
       "description": [
@@ -79,33 +70,6 @@
       ]
     },
     {
-      "title": "Expense Tracker",
-      "tech_stack": ["React", "Chart.js"],
-      "description": [
-        "Built a React.js app for personal finance with authentication and categorized transactions.",
-        "Created dashboards with Chart.js for visualizing income and expenses.",
-        "Implemented reusable components and custom hooks for clean, scalable code."
-      ]
-    },
-    {
-      "title": "Student Management System",
-      "tech_stack": ["Java", "JDBC", "MySQL", "NetBeans", "XAMPP"],
-      "description": [
-        "Developed a Java Swing system with full CRUD functionality for student data.",
-        "Integrated MySQL via JDBC with a secure login system for controlled access.",
-        "Designed a user-friendly interface for efficient data management."
-      ]
-    },
-    {
-      "title": "Notepad",
-      "tech_stack": ["AWT", "Java"],
-      "description": [
-        "Java and AWT (Abstract Window Toolkit) are used in the creation of this project.",
-        "Designed a user interface replicating core Notepad functionalities.",
-        "Implemented Event Handling and File operations including New, Open, Save, Save As, and Replace All."
-      ]
-    },
-    {
       "title": "Mobile E-Commerce App Automation",
       "tech_stack": ["Appium", "Node.js"],
       "description": [
@@ -114,46 +78,11 @@
       ]
     },
     {
-      "title": "Online Assessment Platform",
-      "tech_stack": ["Cypress"],
-      "description": [
-        "Performed end-to-end testing of assessment web app using Cypress with built-in Electron for automated browser handling.",
-        "Testing covered key functions like practice exams, login, and registration."
-      ]
-    },
-    {
-      "title": "Music-Player",
-      "tech_stack": ["Java"],
-      "description": [
-        "Implemented a Java based music player with playlist management",
-        "Developed methods for next, previous, and replay functionalities.",
-        "Added features to list all songs, display interactive menu, and remove tracks from playlist."
-      ]
-    },
-    {
-      "title": "E-commerce Rest",
-      "tech_stack": ["Postman", "Laravel", "MySQL"],
-      "description": [
-        "Tested REST APIs using Postman for buyer/seller and product workflows.",
-        "Validated CRUD operations, response codes, and JSON payloads.",
-        "Identified edge cases and ensured API stability"
-      ]
-    },
-    {
       "title": "Film Fiesta",
       "tech_stack": ["React", "Tailwind CSS"],
       "description": [
         "Developed a movie browsing app with React.js to explore popular, top-rated, and upcoming movies.",
         "It also shows a detailed movie pages displaying descriptions, genres, ratings, runtime, budget, and revenue."
-      ]
-    },
-    {
-      "title": "Phila Tours",
-      "tech_stack": ["PostCSS", "HTML", "CSS", "JavaScript"],
-      "description": [
-        "This tour information website was made using PostCSS, HTML, CSS, and JavaScript.",
-        "Utilized NPM to run scripts, manage dependencies, and distribute Node.js modules.",
-        "Implemented Webpack for efficient bundling and optimization of project files."
       ]
     }
   ],
