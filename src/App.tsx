@@ -11,10 +11,18 @@ export default function App() {
 
   const handleStart = () => setGameState('character');
   
+  // const handleCharacterSelect = (char: 'male' | 'female') => {
+  //   setCharacter(char);
+  //   setGameState('game');
+  // };
+
   const handleCharacterSelect = (char: 'male' | 'female') => {
-    setCharacter(char);
+  setCharacter(char);
+
+  setTimeout(()=>{
     setGameState('game');
-  };
+  },50);
+};
 
   const handleEnterBuilding = (id: string) => {
     setActiveSection(id);

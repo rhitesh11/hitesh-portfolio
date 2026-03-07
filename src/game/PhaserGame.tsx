@@ -21,8 +21,11 @@ export default function PhaserGame({ character, onEnterBuilding }: PhaserGamePro
 
   const config: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
-  width: window.innerWidth,
-  height: window.innerHeight,
+  // width: window.innerWidth,
+  // height: window.innerHeight,
+
+  width: "100%",
+height: "100%",
   parent: containerRef.current,
 
   physics: {
@@ -35,11 +38,16 @@ export default function PhaserGame({ character, onEnterBuilding }: PhaserGamePro
 
   scene: [GameScene],
 
-  scale: {
-    mode: Phaser.Scale.RESIZE,
-    autoCenter: Phaser.Scale.CENTER_BOTH
-  },
-
+  // scale: {
+  //   mode: Phaser.Scale.RESIZE,
+  //   autoCenter: Phaser.Scale.CENTER_BOTH
+  // },
+scale: {
+  mode: Phaser.Scale.RESIZE,
+  autoCenter: Phaser.Scale.CENTER_BOTH,
+  width: window.innerWidth,
+  height: window.innerHeight
+},
   backgroundColor: '#f4f7fb'
 };
 

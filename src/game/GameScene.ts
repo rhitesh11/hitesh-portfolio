@@ -80,6 +80,8 @@ private interactButton!: Phaser.GameObjects.Text;
 
   create(){
 
+    this.physics.world.setFPS(60);
+
     this.physics.world.setBounds(0,0,2000,2000);
 
     // BACKGROUND
@@ -115,6 +117,103 @@ private interactButton!: Phaser.GameObjects.Text;
       g.strokePath();
 
     }
+
+// HIGHWAY STYLE SIGN BOARDS
+
+// const createSign = (x:number, y:number, text:string) => {
+
+//   const g = this.add.graphics();
+  
+//   // board background
+//   g.fillStyle(0x166534);
+//   g.fillRoundedRect(x-90, y-25, 180, 50, 6);
+
+//   // white border
+//   g.lineStyle(3,0xffffff);
+//   g.strokeRoundedRect(x-90, y-25, 180, 50, 6);
+
+//   // poles
+//   g.fillStyle(0x9ca3af);
+//   g.fillRect(x-40, y+25, 8, 40);
+//   g.fillRect(x+32, y+25, 8, 40);
+
+//   // text
+//   this.add.text(x, y, text, {
+//     fontSize: window.innerWidth < 768 ? "10px" : "14px",
+//     color:"#ffffff",
+//     fontStyle:"bold"
+//   })
+//   .setOrigin(0.5)
+//   .setDepth(100);
+
+// };
+const createSign = (x:number, y:number, text:string) => {
+
+  const container = this.add.container(x, y);
+  container.setDepth(50);
+
+  const g = this.add.graphics();
+
+  // board
+  g.fillStyle(0x166534);
+  g.fillRoundedRect(-90, -25, 180, 50, 6);
+
+  g.lineStyle(3,0xffffff);
+  g.strokeRoundedRect(-90, -25, 180, 50, 6);
+
+  // poles
+  // g.fillStyle(0x9ca3af);
+  // g.fillRect(-40,25,8,30);
+  // g.fillRect(32,25,8,30);
+  
+  // g.fillRect(-50,25,16,40);
+// g.fillRect(34,25,16,40);
+
+
+
+g.fillStyle(0x000000,0.02);
+g.fillRect(-50,65,16,5);
+g.fillRect(34,65,16,5);
+
+  g.fillStyle(0x000000,0.2);
+  g.fillRoundedRect(-85,-20,170,45,6);
+
+  const label = this.add.text(0,0,text,{
+    fontSize: window.innerWidth < 768 ? "14px" : "14px",
+    color:"#ffffff",
+    fontStyle:"bold"
+  }).setOrigin(0.5);
+
+  container.add([g,label]);
+
+  return container;
+
+};
+
+// TOP
+createSign(1000, 870, "↑ About / Education").setAngle(0);
+
+// LEFT
+createSign(885, 1000, "↑ Experience").setAngle(-90);
+
+// RIGHT
+createSign(1120, 1000, "Skills / Contact ↑").setAngle(90);
+
+// BOTTOM
+createSign(1000, 1120, "↓ Projects / Resume").setAngle(0);
+
+
+// TOP BOARD
+// createSign(1000, 850, "↑ Education");
+
+// // LEFT BOARD
+// createSign(850, 1000, "← About / Experience");
+
+// // RIGHT BOARD
+// createSign(1150, 1000, "Projects / Contact →");
+
+// // BOTTOM BOARD
+// createSign(1000, 1150, "↓ Resume / Skills");
 
     // BUILDINGS
     // BUILDINGS
@@ -362,7 +461,7 @@ if(data.type==="library"){
   const label=this.add.text(data.x,data.y-80,data.name,{
     fontSize:"16px",
     color:"#111827",
-    backgroundColor:"#ffffffcc",
+    backgroundColor:"#ffffffee",
     padding:{x:8,y:4}
   })
   .setOrigin(0.5)
@@ -372,10 +471,12 @@ if(data.type==="library"){
 
 });
 
+
+
     // PLAYER
     const texture=this.characterType==="male"?"player-male":"player-female";
 
-    this.player=this.physics.add.sprite(900,900,texture);
+    this.player=this.physics.add.sprite(1000,1000,texture);
     this.player.setCollideWorldBounds(true);
     this.player.setDepth(30);
 
@@ -390,7 +491,21 @@ if(data.type==="library"){
 
     // CAMERA
     this.cameras.main.startFollow(this.player,true,0.1,0.1);
+    this.cameras.main.centerOn(this.player.x, this.player.y);
+this.cameras.main.roundPixels = true;
     this.cameras.main.setBounds(0,0,2000,2000);
+
+    // INTERACTION TEXT (VERY IMPORTANT)
+this.interactionText = this.add.text(0,0,"Press E to Enter",{
+  fontSize:"14px",
+  backgroundColor:"#2563eb",
+  color:"#ffffff",
+  padding:{x:8,y:4}
+})
+.setOrigin(0.5)
+.setVisible(false)
+.setDepth(1000);
+
   const screenWidth = this.scale.width;
 
 if(screenWidth < 500){
@@ -402,15 +517,37 @@ if(screenWidth < 500){
 }
 
     // INTERACTION TEXT
-    this.interactionText=this.add.text(0,0,"Press E to Enter",{
-  fontSize:"14px",
-  backgroundColor:"#2563eb",
-  color:"#ffffff",
-  padding:{x:8,y:4}
-})
+    // GAME START INSTRUCTIONS
+
+let startInstructions = "";
+
+if (this.sys.game.device.os.android || this.sys.game.device.os.iOS) {
+  startInstructions =
+    "🎮 Move using Joystick\n\nPress E to Enter Buildings\n\nExplore the City!";
+} else {
+  startInstructions =
+    "🎮 Move with WASD or Arrow Keys\n\nPress E to Enter Buildings\n\nExplore the City!";
+}
+
+const introText = this.add.text(
+  this.scale.width / 2,
+  this.scale.height / 2,
+  startInstructions,
+  {
+    fontSize: window.innerWidth < 768 ? "18px" : "24px",
+    backgroundColor: "#111827",
+    color: "#ffffff",
+    padding: { x: 20, y: 16 },
+    align: "center"
+  }
+)
 .setOrigin(0.5)
-.setVisible(false)
-.setDepth(1000);
+.setScrollFactor(0)
+.setDepth(2000);
+
+this.time.delayedCall(3000, () => {
+  introText.destroy();
+});
 
     // NPCs
     const npcMessages=[
@@ -435,8 +572,8 @@ if(screenWidth < 500){
 
       const text=this.add.text(x,y-40,msg,{
         fontSize:"12px",
-        color:"#111827",
-        backgroundColor:"#ffffffcc",
+        color:"#020617",
+        backgroundColor:"#ffffffee",
         padding:{x:6,y:4}
       }).setOrigin(0.5).setVisible(false);
 
@@ -507,7 +644,7 @@ for(let i=0;i<4;i++){
   const car=this.physics.add.sprite(-600*i,970,"car");
 
   car.setScale(0.08);
-  car.setDepth(5);
+  car.setDepth(2);
 
   this.horizontalCars.push(car);
   this.cars.push(car);
@@ -522,7 +659,7 @@ for(let i=0;i<3;i++){
 
   car.setScale(0.08);
   car.setAngle(90);
-  car.setDepth(5);
+  car.setDepth(2);
 
   this.verticalCars.push(car);
   this.cars.push(car);
@@ -640,6 +777,38 @@ music.play();
 //     y: worldPoint.y
 //   };
 
+// });
+
+// // GAME INSTRUCTIONS
+// let instructionText = "";
+
+// if (this.sys.game.device.os.android || this.sys.game.device.os.iOS) {
+//   instructionText =
+//     "🎮 Move with Joystick\n\nPress E to open building";
+// } else {
+//   instructionText =
+//     "🎮 Move with WASD / Arrow Keys\n\nPress E to enter building";
+// }
+
+// const instructions = this.add.text(
+//   this.scale.width / 2,
+//   80,
+//   instructionText,
+//   {
+//     fontSize: window.innerWidth < 768 ? "14px" : "18px",
+//     backgroundColor: "#111827",
+//     color: "#ffffff",
+//     padding: { x: 12, y: 8 },
+//     align: "center"
+//   }
+// )
+// .setOrigin(0.5)
+// .setScrollFactor(0)
+// .setDepth(1000);
+
+// // hide after 5 seconds
+// this.time.delayedCall(5000, () => {
+//   instructions.destroy();
 // });
 
   }
